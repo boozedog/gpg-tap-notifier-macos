@@ -6,5 +6,7 @@
 	<string>com.palantir.gpg-tap-notifier.help</string>
 	<key>CFBundleHelpBookFolder</key>
 	<string>GpgTapNotifier.help</string>
+	<key>NSFocusStatusUsageDescription</key>
+	<string>GPG Tap Notifier reads your Focus status so that text-to-speech reminders are silenced while Do Not Disturb or another Focus mode is active.</string>
 </dict>
 </plist>

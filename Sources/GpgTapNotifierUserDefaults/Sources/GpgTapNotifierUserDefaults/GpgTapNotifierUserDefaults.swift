@@ -10,6 +10,13 @@ public struct AppUserDefaults  {
     public static let SUITE_NAME = "PXSBYN8444.com.palantir.gpg-tap-notifier"
     public static let suite = UserDefaults(suiteName: "PXSBYN8444.com.palantir.gpg-tap-notifier")
 
+    // TTS settings live in a non-App-Group preferences domain so they sync
+    // between the GUI and agent processes even when the bundles are signed
+    // ad-hoc (App Group entitlements only synchronize across processes when
+    // both are signed by an Apple-issued team certificate; otherwise each
+    // process gets its own isolated suite silo with the same name).
+    public static let ttsSuite = UserDefaults(suiteName: "com.palantir.gpg-tap-notifier.shared")
+
     public static let gpgAgentConfPath = UserDefaultsConfig(
         key: "gpgAgentConfPath",
         getDefault: { () -> URL in
@@ -59,4 +66,12 @@ public struct AppUserDefaults  {
         key: "didEnableCommandPreviouslyComplete",
         getDefault: { false }
     )
+
+    public static let ttsEnabled = UserDefaultsConfig(
+        key: "ttsEnabled",
+        getDefault: { false })
+
+    public static let ttsVoiceIdentifier = UserDefaultsConfig<String?>(
+        key: "ttsVoiceIdentifier",
+        getDefault: { nil })
 }

@@ -49,11 +49,13 @@ struct ContentView: View {
                 .padding(.vertical)
 
             TabView {
-                VStack {
+                VStack(alignment: .leading, spacing: 16) {
                     DeliveryMechanismChooserView()
-                        .padding()
+                    Divider()
+                    TextToSpeechView()
                     Spacer()
                 }
+                .padding()
                 .tabItem { Text("Delivery") }
 
                 VStack {
