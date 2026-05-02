@@ -8,8 +8,8 @@ class AutoReloadingDeliveryMechanism {
     private var cachedDeliveryMechanism: CachedDeliveryMechansim?
 
     func get() -> DeliveryMechanism {
-        let currentDeliveryMechanismOption = readCurrentDeliveryMechanismOption()
-        if let cached = cachedDeliveryMechanism, cached.optionValue == currentDeliveryMechanismOption {
+        let cacheKey = readCurrentCacheKey()
+        if let cached = cachedDeliveryMechanism, cached.cacheKey == cacheKey {
             return cached.deliveryMechanism
         }
 
@@ -18,18 +18,27 @@ class AutoReloadingDeliveryMechanism {
         // the screen forever.
         cachedDeliveryMechanism?.deliveryMechanism.dismiss()
 
-        let deliveryMechanism = mapReminderToDeliveryMechanism(currentDeliveryMechanismOption)
-        cachedDeliveryMechanism = CachedDeliveryMechansim(
-            deliveryMechanism: deliveryMechanism,
-            optionValue: currentDeliveryMechanismOption)
+        let visual = mapReminderToDeliveryMechanism(cacheKey.visual)
+        let mechanism: DeliveryMechanism = cacheKey.ttsEnabled
+            ? CompositeDeliveryMechanism(primary: visual, secondary: DeliveryMechanismTTS())
+            : visual
 
-        return deliveryMechanism
+        cachedDeliveryMechanism = CachedDeliveryMechansim(
+            deliveryMechanism: mechanism,
+            cacheKey: cacheKey)
+
+        return mechanism
     }
 }
 
 private struct CachedDeliveryMechansim  {
     var deliveryMechanism: DeliveryMechanism
-    let optionValue: ReminderDeliveryMechanismOption
+    let cacheKey: DeliveryMechanismCacheKey
+}
+
+private struct DeliveryMechanismCacheKey: Equatable {
+    let visual: ReminderDeliveryMechanismOption
+    let ttsEnabled: Bool
 }
 
 private func mapReminderToDeliveryMechanism(_ option: ReminderDeliveryMechanismOption) -> DeliveryMechanism {
@@ -39,9 +48,14 @@ private func mapReminderToDeliveryMechanism(_ option: ReminderDeliveryMechanismO
     }
 }
 
-private func readCurrentDeliveryMechanismOption() -> ReminderDeliveryMechanismOption {
-    let storedValue = AppUserDefaults.suite?.integer(forKey: AppUserDefaults.reminderDeliveryMechanism.key)
-    return storedValue
+private func readCurrentCacheKey() -> DeliveryMechanismCacheKey {
+    let visualStored = AppUserDefaults.suite?.integer(forKey: AppUserDefaults.reminderDeliveryMechanism.key)
+    let visual = visualStored
         .flatMap { ReminderDeliveryMechanismOption(rawValue: $0) }
         ?? AppUserDefaults.reminderDeliveryMechanism.getDefault()
+
+    let ttsEnabled = AppUserDefaults.ttsSuite?.bool(forKey: AppUserDefaults.ttsEnabled.key)
+        ?? AppUserDefaults.ttsEnabled.getDefault()
+
+    return DeliveryMechanismCacheKey(visual: visual, ttsEnabled: ttsEnabled)
 }

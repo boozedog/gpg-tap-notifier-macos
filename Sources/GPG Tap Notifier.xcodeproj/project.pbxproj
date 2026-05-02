@@ -12,6 +12,9 @@
 		46476798284EFC9900A7E6C9 /* DeliveryMechanism.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46476797284EFC9900A7E6C9 /* DeliveryMechanism.swift */; };
 		4647679A284EFD2D00A7E6C9 /* DeliveryMechanismNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46476799284EFD2D00A7E6C9 /* DeliveryMechanismNotification.swift */; };
 		4647679C284F009E00A7E6C9 /* DeliveryMechanismAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4647679B284F009E00A7E6C9 /* DeliveryMechanismAlert.swift */; };
+		AA00000100000000000A0001 /* DeliveryMechanismTTS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000200000000000A0001 /* DeliveryMechanismTTS.swift */; };
+		AA00000100000000000A0002 /* CompositeDeliveryMechanism.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000200000000000A0002 /* CompositeDeliveryMechanism.swift */; };
+		AA00000100000000000A0003 /* TextToSpeechView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000200000000000A0003 /* TextToSpeechView.swift */; };
 		464CDAF72870EFE300EAF1AD /* DeliveryMechanismTestButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464CDAF62870EFE300EAF1AD /* DeliveryMechanismTestButtonView.swift */; };
 		464CDAF92870F3E800EAF1AD /* ProgressViewLoadingGpgConf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464CDAF82870F3E800EAF1AD /* ProgressViewLoadingGpgConf.swift */; };
 		466DC527291869A10046B9DD /* OpenScdaemonExecFailAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466DC526291869A10046B9DD /* OpenScdaemonExecFailAlert.swift */; };
@@ -78,6 +81,9 @@
 		46476797284EFC9900A7E6C9 /* DeliveryMechanism.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryMechanism.swift; sourceTree = "<group>"; };
 		46476799284EFD2D00A7E6C9 /* DeliveryMechanismNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryMechanismNotification.swift; sourceTree = "<group>"; };
 		4647679B284F009E00A7E6C9 /* DeliveryMechanismAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryMechanismAlert.swift; sourceTree = "<group>"; };
+		AA00000200000000000A0001 /* DeliveryMechanismTTS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryMechanismTTS.swift; sourceTree = "<group>"; };
+		AA00000200000000000A0002 /* CompositeDeliveryMechanism.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositeDeliveryMechanism.swift; sourceTree = "<group>"; };
+		AA00000200000000000A0003 /* TextToSpeechView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextToSpeechView.swift; sourceTree = "<group>"; };
 		464CDAF62870EFE300EAF1AD /* DeliveryMechanismTestButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryMechanismTestButtonView.swift; sourceTree = "<group>"; };
 		464CDAF82870F3E800EAF1AD /* ProgressViewLoadingGpgConf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewLoadingGpgConf.swift; sourceTree = "<group>"; };
 		466DC526291869A10046B9DD /* OpenScdaemonExecFailAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenScdaemonExecFailAlert.swift; sourceTree = "<group>"; };
@@ -155,6 +161,8 @@
 				46476797284EFC9900A7E6C9 /* DeliveryMechanism.swift */,
 				4647679B284F009E00A7E6C9 /* DeliveryMechanismAlert.swift */,
 				46476799284EFD2D00A7E6C9 /* DeliveryMechanismNotification.swift */,
+				AA00000200000000000A0001 /* DeliveryMechanismTTS.swift */,
+				AA00000200000000000A0002 /* CompositeDeliveryMechanism.swift */,
 			);
 			path = DeliveryMechanism;
 			sourceTree = "<group>";
@@ -171,6 +179,7 @@
 				464CDAF62870EFE300EAF1AD /* DeliveryMechanismTestButtonView.swift */,
 				464CDAF82870F3E800EAF1AD /* ProgressViewLoadingGpgConf.swift */,
 				837FD81B27E6BA3500CDD61B /* ReminderTextEditView.swift */,
+				AA00000200000000000A0003 /* TextToSpeechView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -461,6 +470,7 @@
 				835F7A9327DE87D30046D482 /* AsyncUtils.swift in Sources */,
 				46A442572856FA980012CE9A /* DeliveryMechanismChoiceView.swift in Sources */,
 				831CC8A127D07D0F002D8A6D /* Constants.swift in Sources */,
+				AA00000100000000000A0003 /* TextToSpeechView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,6 +487,8 @@
 				8345C08D27EA37A3000413FF /* ReadCompletionUtils.swift in Sources */,
 				4647679A284EFD2D00A7E6C9 /* DeliveryMechanismNotification.swift in Sources */,
 				46476798284EFC9900A7E6C9 /* DeliveryMechanism.swift in Sources */,
+				AA00000100000000000A0001 /* DeliveryMechanismTTS.swift in Sources */,
+				AA00000100000000000A0002 /* CompositeDeliveryMechanism.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
