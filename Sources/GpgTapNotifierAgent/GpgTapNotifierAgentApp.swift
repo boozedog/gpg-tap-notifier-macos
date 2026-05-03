@@ -124,20 +124,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
 
         NotificationCenter.default.addObserver(forName: FileHandle.readCompletionNotification, object: scdaemonStdOut.fileHandleForReading, queue: .main) { notification in
-            presentReminderTask?.cancel()
-            Task { await self.dismissReminder() }
-
             let data = try! readCompletionResult(notification.userInfo!).get()
+
+            if shouldCancelReminder(forScdaemonStdout: data as Data) {
+                presentReminderTask?.cancel()
+                Task { await self.dismissReminder() }
+            }
+
             try! FileHandle.standardOutput.write(contentsOf: data)
 
             scdaemonStdOut.fileHandleForReading.readInBackgroundAndNotify()
         }
 
         NotificationCenter.default.addObserver(forName: FileHandle.readCompletionNotification, object: scdaemonStdErr.fileHandleForReading, queue: .main) { notification in
-            presentReminderTask?.cancel()
-            Task { await self.dismissReminder() }
-
             let data = try! readCompletionResult(notification.userInfo!).get()
+
+            if !data.isEmpty {
+                presentReminderTask?.cancel()
+                Task { await self.dismissReminder() }
+            }
+
             try! FileHandle.standardError.write(contentsOf: data)
 
             scdaemonStdErr.fileHandleForReading.readInBackgroundAndNotify()
@@ -206,5 +212,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private func dismissReminder() {
         var deliveryMechanism = autoReloadingDeliveryMechanism.get()
         deliveryMechanism.dismiss()
+    }
+}
+
+private func shouldCancelReminder(forScdaemonStdout data: Data) -> Bool {
+    guard !data.isEmpty else {
+        return false
+    }
+
+    guard let text = String(data: data, encoding: .utf8) else {
+        return true
+    }
+
+    return text.split(separator: "\n").contains { line in
+        line == "OK" ||
+            line.starts(with: "OK ") ||
+            line.starts(with: "ERR ") ||
+            line.starts(with: "D ") ||
+            line.starts(with: "INQUIRE ")
     }
 }

@@ -1,4 +1,5 @@
 xcuserdata/
+/build/
 
 # This directory contains files with absolute file system paths that won't be
 # portable across git clones. It looks like this repo can safely gitignore this
